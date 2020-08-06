@@ -1,2 +1,2 @@
 # netget
-A bash script for transfering files easily between the Unix-based systems. (PORT => 643216)
+A python script for transfering files easily between the Unix-based systems. (PORT => 7575)

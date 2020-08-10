@@ -55,7 +55,7 @@ def ctrlC(sig, frame):
 	
 	ans = input("Do you want to cancel the downloading file? [y,N]> ")
 
-	if str(ans) == '\n' or str(ans).lower() == 'n':
+	if str(ans).lower() == 'y':
 		
 		# Cancel the downloading
 

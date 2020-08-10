@@ -45,7 +45,7 @@ def listen():
 
 		ans = input("Do you want to send the file? [Y,n]> ")
 
-		if str(ans) == '\n' or str(ans).lower() == 'y':
+		if str(ans).lower() != 'n':
 			
 			# Send the file
 			
@@ -54,7 +54,7 @@ def listen():
 			p = fileObj.read(4096)
 
 			while p:
-				sock.send(p)
+				sc.send(p)
 
 				p = fileObj.read(4096)
 

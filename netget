@@ -41,7 +41,6 @@ function main {
 }
 
 function menu {
-	
 	echo "Welcome to netget"
 	echo "What can I do for you?"
 	echo "	-[1] Share a file."
@@ -52,9 +51,11 @@ function menu {
 function server() {
 	if [ ! -z "$1" ]
 	then
-		echo $1
+		/usr/share/netget/server.py $1
 	else
-		echo "From the menu"
+		echo "Enter the path of your file> "
+		read fileName
+		/usr/share/netget/server.py $1
 	fi
 }
 
@@ -65,10 +66,6 @@ function client()  {
 	else
 		echo "From the menu"
 	fi
-}
-
-function getFileName {
-	echo ""
 }
 
 main $1 $2

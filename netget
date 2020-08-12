@@ -58,7 +58,7 @@ function server() {
 	then
 		/usr/share/netget/server.py $1
 	else
-		echo "Enter the path of your file> "
+		echo -n "Enter the path of your file> "
 		read fileName
 		/usr/share/netget/server.py $1
 	fi
@@ -69,9 +69,9 @@ function client()  {
 	then
 		/usr/share/netget/client.py $1 $2	
 	else
-		echo "Enter the server ip> "
+		echo -n "Enter the server ip> "
 		read serverIp
-		echo "Enter a name for downloaded file> "
+		echo -n "Enter a name for downloaded file> "
 		read fileName
 		/usr/share/netget/client.py $1 $2
 	fi

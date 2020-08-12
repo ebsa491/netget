@@ -2,7 +2,7 @@
 
 function main {
 
-	if [-z "$1"];then
+	if [ -z "$1" ];then
 		clear
 		
 		menu
@@ -18,14 +18,16 @@ function main {
 			sleep 1
 			main
 		fi
-	else
+	elif [ -z "$2" ];then
 		if [$1 == 'server'];then
-			
+			server $2
 		elif [$1 == 'client'];then
-
+			client $2
 		else
 			echo "Usage: netget {server | client} FILENAME"
 		fi
+	else 
+		echo "Usage: netget {server | client} FILENAME"
 	fi
 
 }
@@ -36,19 +38,23 @@ function menu {
 	echo "What can I do for you?"
 	echo "	-[1] Share a file."
 	echo "	-[2] Take a file."
-	echo "> "
+	echo -n "> "
 }
 
-function server {
-
+function server() {
+	if [ -z "$1"];then
+		echo $1
+	fi
 }
 
-function client {
-
+function client() {
+	if [ -z "$1"];then
+		echo $1
+	fi
 }
 
 function getFileName {
-
+	echo ""
 }
 
 main

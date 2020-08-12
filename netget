@@ -30,12 +30,17 @@ function main {
 			server $2
 		elif [ "$1" == "client" ]
 		then
-			client $2
+			if [ ! -z "$3" ]
+			then
+				client $2 $3
+			else
+				usage
+			fi
 		else
-			echo "Usage: netget {server | client} FILENAME"
+			usage
 		fi
 	else 
-		echo "Usage: netget {server | client} FILENAME"
+		usage
 	fi
 
 }
@@ -62,10 +67,18 @@ function server() {
 function client()  {
 	if [ ! -z "$1" ]
 	then
-		echo $1
+		/usr/share/netget/client.py $1 $2	
 	else
-		echo "From the menu"
+		echo "Enter the server ip> "
+		read serverIp
+		echo "Enter a name for downloaded file> "
+		read fileName
+		/usr/share/netget/client.py $1 $2
 	fi
 }
 
-main $1 $2
+function usage {
+	echo "Usage: netget {server | client} [IP_ADDRESS(for client)] FILENAME"
+}
+
+main $1 $2 $3

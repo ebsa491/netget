@@ -2,26 +2,34 @@
 
 function main {
 
-	if [ -z "$1" ];then
+	if [ -z "$1" ]
+	then
 		clear
 		
 		menu
 		
 		read input # prompt
 		
-		if [$input == '1'];then # SERVER
+		if [ $input -eq 1 ]
+		then 
+			# SERVER
 			server
-		elif [$input == '2'];then # CLIENT
+		elif [ $input -eq 2 ]
+		then 
+			# CLIENT
 			client
 		else
 			echo "###ERROR###"
 			sleep 1
 			main
 		fi
-	elif [ -z "$2" ];then
-		if [$1 == 'server'];then
+	elif [ ! -z "$2" ]
+	then
+		if [ "$1" == "server" ]
+		then
 			server $2
-		elif [$1 == 'client'];then
+		elif [ "$1" == "client" ]
+		then
 			client $2
 		else
 			echo "Usage: netget {server | client} FILENAME"
@@ -42,14 +50,20 @@ function menu {
 }
 
 function server() {
-	if [ -z "$1"];then
+	if [ ! -z "$1" ]
+	then
 		echo $1
+	else
+		echo "From the menu"
 	fi
 }
 
-function client() {
-	if [ -z "$1"];then
+function client()  {
+	if [ ! -z "$1" ]
+	then
 		echo $1
+	else
+		echo "From the menu"
 	fi
 }
 
@@ -57,4 +71,4 @@ function getFileName {
 	echo ""
 }
 
-main
+main $1 $2

@@ -60,7 +60,7 @@ function server() {
 	else
 		echo -n "Enter the path of your file> "
 		read fileName
-		/usr/share/netget/server.py $1
+		/usr/share/netget/server.py $fileName
 	fi
 }
 
@@ -73,7 +73,7 @@ function client()  {
 		read serverIp
 		echo -n "Enter a name for downloaded file> "
 		read fileName
-		/usr/share/netget/client.py $1 $2
+		/usr/share/netget/client.py $serverIp $fileName
 	fi
 }
 

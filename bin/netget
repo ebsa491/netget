@@ -58,7 +58,7 @@ function server() {
 	then
 		/usr/share/netget/server.py $1
 	else
-		echo -n "Enter the path of your file> "
+		echo -n "Enter the full path of your file> "
 		read fileName
 		/usr/share/netget/server.py $fileName
 	fi

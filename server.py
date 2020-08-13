@@ -10,7 +10,7 @@ def main():
 
 	global fileObj
 
-	if len(sys.argv) > 1:
+	if len(sys.argv) > 1 and str(sys.argv[1]) != __file__:
 	
 		try:
 

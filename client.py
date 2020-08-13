@@ -9,7 +9,7 @@ sock = socket.socket()
 
 def main():
 	
-	if len(sys.argv) > 1 and str(sys.argv[1]) != __file__:
+	if len(sys.argv) > 2 and str(sys.argv[1]) != __file__:
 		
 		try:
 			sock.connect((str(sys.argv[1]), 7575))
@@ -32,7 +32,7 @@ def download():
 
 	try:
 		
-		fileObj = open("./" + str(sys.argv[1]) + ".dwnld", 'wb')
+		fileObj = open("./" + str(sys.argv[2]), 'wb')
 
 	except:
 
@@ -59,7 +59,7 @@ def ctrlC(sig, frame):
 		
 		# Cancel the downloading
 
-		os.remove("./" + str(sys.argv[1]) + ".dwnld")
+		os.remove("./" + str(sys.argv[2]))
 
 if __name__ == '__main__':
 	main()

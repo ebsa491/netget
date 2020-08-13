@@ -35,8 +35,6 @@ def main():
 
 def listen():
 	
-	i = 0
-
 	while True:
 		
 		sc, address = sock.accept()

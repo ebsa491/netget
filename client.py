@@ -9,7 +9,7 @@ sock = socket.socket()
 
 def main():
 	
-	if len(sys.argv) > 1:
+	if len(sys.argv) > 1 and str(sys.argv[1]) != __file__:
 		
 		try:
 			sock.connect((str(sys.argv[1]), 7575))

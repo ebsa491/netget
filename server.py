@@ -31,7 +31,7 @@ def main():
 		listen()
 
 	else:
-		print("Usage: socket.py FILENAME")
+		print("Usage: server.py FILENAME")
 
 def listen():
 	

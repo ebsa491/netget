@@ -58,11 +58,7 @@ def listen():
 
 			print("[\033[0;32m+\033[0m] Done!")
 
-		else:
-			sc.close()
-
-	fileObj.close()
-	sc.close()
+		sc.close()
 
 def ctrlC(sig, frame):
 

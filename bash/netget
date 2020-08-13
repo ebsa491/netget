@@ -48,9 +48,9 @@ function main {
 function menu {
 	echo "Welcome to netget"
 	echo "What can I do for you?"
-	echo "	-[1] Share a file."
-	echo "	-[2] Take a file."
-	echo -n "> "
+	echo -e "	-[\033[1;34m1\033[0m] Share a file."
+	echo -e "	-[\033[1;34m2\033[0m] Take a file."
+	echo -ne "\033[1;34m>\033[0m "
 }
 
 function server() {

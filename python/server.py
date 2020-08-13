@@ -39,6 +39,8 @@ def listen():
 		
 		sc, address = sock.accept()
 
+		fileObj.seek(0)
+
 		print("[\033[0;32m+\033[0m] New client : " + str(address[0]))
 
 		ans = input("Do you want to send the file? [Y,n]> ")

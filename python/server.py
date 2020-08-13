@@ -64,13 +64,20 @@ def listen():
 
 def ctrlC(sig, frame):
 
-	print("\n[\033[0;31m-\033[0m] Server is going to down...")
+	ans = input("Do you want to shutdown the server? [y,N]> ")
 
-	fileObj.close()
+	if str(ans).lower() == 'y':
+		
+		print("\n[\033[0;31m-\033[0m] Server is going to down...")
 
-	sock.close()
+		fileObj.close()
 
-	sys.exit(0)
+		sock.close()
+
+		sys.exit(0)
+
+	else:
+		print("[\033[0;32m+\033[0m] Server is up...")
 
 if __name__ == '__main__':
 	main()

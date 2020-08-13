@@ -22,7 +22,7 @@ def main():
 		download()
 
 	else:
-		print("Usage: client.py SERVER_IP_ADDRESS")
+		print("Usage: client.py SERVER_IP_ADDRESS FILENAME")
 
 def download():
 	

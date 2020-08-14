@@ -68,7 +68,7 @@ def ctrlC(sig, frame):
 
 	if str(ans).lower() == 'y':
 		
-		print("\n[\033[0;31m-\033[0m] Server is going to down...")
+		print("\n[\033[0;31m-\033[0m] Server is going down...")
 
 		fileObj.close()
 

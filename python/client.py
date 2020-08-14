@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# License : GPL v3.0
+# Created by Saman Ebrahimnezhad .
 
 import socket
 import signal

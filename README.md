@@ -1,5 +1,5 @@
 # netget
-A python script for transfering files easily between the Unix-based systems. (PORT => 7575 (TCP))
+A python script for transferring files easily between the Unix-based systems. (PORT => 7575 (TCP))
 
 [![Build Status](https://img.shields.io/badge/build-passing-success)](https://samebison.ir)
 [![Version: 1.0](https://img.shields.io/badge/version-1.0-green)](https://samebison.ir)

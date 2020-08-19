@@ -14,7 +14,7 @@ class NetgetServer:
 			try:
 
 				self.sock = socket.socket()
-				self.fileObj = open(str(sys.argv[1]), 'rb')
+				self.theFile = open(str(sys.argv[1]), 'rb')
 
 			except:
 				print("[\033[0;31m-\033[0m] Error in loading the file...")
@@ -39,7 +39,7 @@ class NetgetServer:
 
 			sc, address = self.sock.accept()
 
-			self.fileObj.seek(0)
+			self.theFile.seek(0)
 
 			print("[\033[0;32m+\033[0m] New client : " + str(address[0]))
 
@@ -51,12 +51,12 @@ class NetgetServer:
 
 				print("[\033[0;32m+\033[0m] Sending the file...")
 
-				p = self.fileObj.read(4096)
+				p = self.theFile.read(4096)
 
 				while p:
 					sc.send(p)
 
-					p = self.fileObj.read(4096)
+					p = self.theFile.read(4096)
 
 				print("[\033[0;32m+\033[0m] Done!")
 
@@ -70,7 +70,7 @@ class NetgetServer:
 
 			print("\n[\033[0;31m-\033[0m] Server is going down...")
 
-			self.fileObj.close()
+			self.theFile.close()
 
 			self.sock.close()
 

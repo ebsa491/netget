@@ -7,61 +7,61 @@ import signal
 import sys
 import os
 
-sock = socket.socket()
+class NetgetClient:
+	def __init__(self):
 
-def main():
-	
-	if len(sys.argv) > 2 and str(sys.argv[1]) != __file__:
-		
+		if len(sys.argv) > 2 and str(sys.argv[1]) != __file__:
+
+			try:
+
+				self.sock = socket.socket()
+				self.sock.connect((str(sys.argv[1]), 7575))
+
+			except:
+				print("[\033[0;31m-\033[0m] Error in connecting to the server...")
+				sys.exit(1)
+
+			signal.signal(signal.SIGINT, self.ctrlC)
+
+			self.download()
+
+		else:
+			print("Usage: client.py SERVER_IP_ADDRESS FILENAME")
+
+	def download(self):
+
+		print("[\033[0;32m+\033[0m] Downloading the file...")
+
 		try:
-			sock.connect((str(sys.argv[1]), 7575))
+
+			self.fileObj = open("./" + str(sys.argv[2]), 'wb')
+
 		except:
-			print("[\033[0;31m-\033[0m] Error in connecting to the server...")
-			sys.exit(1)
-		
-		signal.signal(signal.SIGINT, ctrlC)
 
-		download()
+			print("[\033[0;31m-\033[0m] Error in writing the file...")
 
-	else:
-		print("Usage: client.py SERVER_IP_ADDRESS FILENAME")
+		p = self.sock.recv(4096)
 
-def download():
-	
-	global fileObj
+		while p:
+			self.fileObj.write(p)
+			p = self.sock.recv(4096)
 
-	print("[\033[0;32m+\033[0m] Downloading the file...")
+		self.fileObj.close()
+		self.sock.close()
 
-	try:
-		
-		fileObj = open("./" + str(sys.argv[2]), 'wb')
+		print("[\033[0;32m+\033[0m] Download completed!")
 
-	except:
+		sys.exit(0)
 
-		print("[\033[0;31m-\033[0m] Error in writing the file...")
+	def ctrlC(self, sig, frame):
 
-	p = sock.recv(4096)
+		ans = input("Do you want to cancel the downloading file? [y,N]> ")
 
-	while p:
-		fileObj.write(p)
-		p = sock.recv(4096)
+		if str(ans).lower() == 'y':
 
-	fileObj.close()
-	sock.close()
+			# Cancel the downloading
 
-	print("[\033[0;32m+\033[0m] Download completed!")
-
-	sys.exit(0)
-
-def ctrlC(sig, frame):
-	
-	ans = input("Do you want to cancel the downloading file? [y,N]> ")
-
-	if str(ans).lower() == 'y':
-		
-		# Cancel the downloading
-
-		os.remove("./" + str(sys.argv[2]))
+			os.remove("./" + str(sys.argv[2]))
 
 if __name__ == '__main__':
-	main()
+	netget_client = NetgetClient()

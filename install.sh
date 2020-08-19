@@ -25,7 +25,6 @@ fi
 
 sudo cp bash/netget /bin/
 
-sudo cp python/*.py /usr/share/netget/
+sudo cp core/*.py /usr/share/netget/
 
 echo -e "[\033[0;32m+\033[0m] Done! Just type netget..."
-

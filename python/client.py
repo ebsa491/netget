@@ -34,7 +34,7 @@ class NetgetClient:
 
 		try:
 
-			self.fileObj = open("./" + str(sys.argv[2]), 'wb')
+			self.theFile = open("./" + str(sys.argv[2]), 'wb')
 
 		except:
 
@@ -43,10 +43,10 @@ class NetgetClient:
 		p = self.sock.recv(4096)
 
 		while p:
-			self.fileObj.write(p)
+			self.theFile.write(p)
 			p = self.sock.recv(4096)
 
-		self.fileObj.close()
+		self.theFile.close()
 		self.sock.close()
 
 		print("[\033[0;32m+\033[0m] Download completed!")

@@ -1,4 +1,6 @@
 #!/bin/bash
+# License : GPL v3.0
+# Created by Saman Ebrahimnezhad .
 
 echo "Which distro are you using?"
 echo -e "	[\033[1;33m1\033[0m] Debian-based(\033[0;33mUbuntu\033[0m, \033[1;32mMint\033[0m ...)"

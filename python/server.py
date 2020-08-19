@@ -6,80 +6,79 @@ import socket
 import signal
 import sys
 
-sock = socket.socket()
+class NetgetServer:
+	def __init__(self):
 
-def main():
+		if len(sys.argv) > 1 and str(sys.argv[1]) != __file__:
 
-	global fileObj
+			try:
 
-	if len(sys.argv) > 1 and str(sys.argv[1]) != __file__:
-	
-		try:
+				self.sock = socket.socket()
+				self.fileObj = open(str(sys.argv[1]), 'rb')
 
-			fileObj = open(str(sys.argv[1]), 'rb')
+			except:
+				print("[\033[0;31m-\033[0m] Error in loading the file...")
+				sys.exit(1)
 
-		except:
-			print("[\033[0;31m-\033[0m] Error in loading the file...")
-			sys.exit(1)
+			self.sock.bind(('', 7575))
 
-		sock.bind(('', 7575))
+			self.sock.listen(1)
 
-		sock.listen(1)
+			print("[\033[0;32m+\033[0m] Server is running...")
 
-		print("[\033[0;32m+\033[0m] Server is running...")
-		
-		signal.signal(signal.SIGINT, ctrlC)
+			signal.signal(signal.SIGINT, self.ctrlC)
 
-		listen()
+			self.listen()
 
-	else:
-		print("Usage: server.py FILENAME")
+		else:
+			print("Usage: server.py FILENAME")
 
-def listen():
-	
-	while True:
-		
-		sc, address = sock.accept()
+	def listen(self):
 
-		fileObj.seek(0)
+		while True:
 
-		print("[\033[0;32m+\033[0m] New client : " + str(address[0]))
+			sc, address = self.sock.accept()
 
-		ans = input("Do you want to send the file? [Y,n]> ")
+			self.fileObj.seek(0)
 
-		if str(ans).lower() != 'n':
-			
-			# Send the file
-			
-			print("[\033[0;32m+\033[0m] Sending the file...")
+			print("[\033[0;32m+\033[0m] New client : " + str(address[0]))
 
-			p = fileObj.read(4096)
+			ans = input("Do you want to send the file? [Y,n]> ")
 
-			while p:
-				sc.send(p)
+			if str(ans).lower() != 'n':
 
-				p = fileObj.read(4096)
+				# Send the file
 
-			print("[\033[0;32m+\033[0m] Done!")
+				print("[\033[0;32m+\033[0m] Sending the file...")
 
-		sc.close()
+				p = self.fileObj.read(4096)
 
-def ctrlC(sig, frame):
+				while p:
+					sc.send(p)
 
-	ans = input("Do you want to shutdown the server? [y,N]> ")
+					p = self.fileObj.read(4096)
 
-	if str(ans).lower() == 'y':
-		
-		print("\n[\033[0;31m-\033[0m] Server is going down...")
+				print("[\033[0;32m+\033[0m] Done!")
 
-		fileObj.close()
+			sc.close()
 
-		sock.close()
+	def ctrlC(self, sig, frame):
 
-		sys.exit(0)
+		ans = input("Do you want to shutdown the server? [y,N]> ")
 
-	else:
-		print("[\033[0;32m+\033[0m] Server is up...")
+		if str(ans).lower() == 'y':
+
+			print("\n[\033[0;31m-\033[0m] Server is going down...")
+
+			self.fileObj.close()
+
+			self.sock.close()
+
+			sys.exit(0)
+
+		else:
+			print("[\033[0;32m+\033[0m] Server is up...")
+
 
 if __name__ == '__main__':
-	main()
+	netget_server = NetgetServer()

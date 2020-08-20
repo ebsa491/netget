@@ -46,10 +46,25 @@ class NetgetClient:
 		except:
 
 			print("[\033[0;31m-\033[0m] Error in writing the file...")
+			self.sock.close()
+			sys.exit(1)
+
+		try:
+
+			self.rsa = RSA_Module.RSAClass()
+			self.sock.send(self.rsa.publicKey())
+
+		except:
+
+			print("[\033[0;31m-\033[0m] Error in sending the public key...")
+			self.sock.close()
+			self.theFile.close()
+			sys.exit(1)
 
 		p = self.sock.recv(4096)
 
 		while p:
+			p = self.rsa.decrypt(p, self.rsa.privateKey())
 			self.theFile.write(p)
 			p = self.sock.recv(4096)
 

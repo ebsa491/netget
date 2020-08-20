@@ -36,3 +36,14 @@ class RSAClass:
 		encrypted = encryptionCipher.encrypt(plainData)
 
 		return b64encode(encrypted).decode()
+
+    def decrypt(self, data, privateKeyObj):
+		encrypted = b64decode(data.encode())
+
+		privateKey = RSA.importKey(privateKeyObj)
+
+		decryptionCipher = PKCS1_v1_5.new(privateKey)
+
+		plainData = decryptionCipher.decrypt(encrypted, 16)
+
+		return b64decode(plainData).decode()

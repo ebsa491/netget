@@ -18,8 +18,6 @@ class RSAClass:
 		self.__publicKey = key.publickey().exportKey('PEM')
 		self.__privateKey = key.exportKey('PEM')
 
-		return True
-
 	def publicKey(self):
 		return self.__publicKey
 

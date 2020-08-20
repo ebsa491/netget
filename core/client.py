@@ -5,6 +5,7 @@
 # This script will connect to the server and will save the downloaded file.
 # You can use this script personally but pay attention to the license file.
 
+import RSA_Module
 import socket
 import signal
 import sys

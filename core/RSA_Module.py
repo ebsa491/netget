@@ -25,3 +25,14 @@ class RSAClass:
 
     def privateKey(self):
         return self.__privateKey
+
+    def encrypt(self, data, publicKeyObj):
+		plainData = b64encode(data.encode())
+
+		publicKey = RSA.importKey(publicKeyObj)
+
+		encryptionCipher = PKCS1_v1_5.new(publicKey)
+
+		encrypted = encryptionCipher.encrypt(plainData)
+
+		return b64encode(encrypted).decode()

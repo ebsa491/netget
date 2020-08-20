@@ -19,3 +19,9 @@ class RSAClass:
         self.__privateKey = key.exportKey('PEM')
 
 		return True
+
+    def publicKey(self):
+        return self.__publicKey
+
+    def privateKey(self):
+        return self.__privateKey

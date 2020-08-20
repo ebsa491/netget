@@ -15,18 +15,18 @@ class RSAClass:
 
 		key = RSA.generate(2048, rng)
 
-        self.__publicKey = key.publickey().exportKey('PEM')
-        self.__privateKey = key.exportKey('PEM')
+		self.__publicKey = key.publickey().exportKey('PEM')
+		self.__privateKey = key.exportKey('PEM')
 
 		return True
 
-    def publicKey(self):
-        return self.__publicKey
+	def publicKey(self):
+		return self.__publicKey
 
-    def privateKey(self):
-        return self.__privateKey
+	def privateKey(self):
+		return self.__privateKey
 
-    def encrypt(self, data, publicKeyObj):
+	def encrypt(self, data, publicKeyObj):
 		plainData = b64encode(data.encode())
 
 		publicKey = RSA.importKey(publicKeyObj)
@@ -37,7 +37,7 @@ class RSAClass:
 
 		return b64encode(encrypted).decode()
 
-    def decrypt(self, data, privateKeyObj):
+	def decrypt(self, data, privateKeyObj):
 		encrypted = b64decode(data.encode())
 
 		privateKey = RSA.importKey(privateKeyObj)

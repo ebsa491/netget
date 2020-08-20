@@ -69,6 +69,9 @@ class NetgetClient:
 			# Cancel the downloading
 
 			os.remove("./" + str(sys.argv[2]))
+			self.sock.close()
+			self.theFile.close()
+			sys.exit(1)
 
 if __name__ == '__main__':
 	netget_client = NetgetClient()

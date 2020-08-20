@@ -11,7 +11,7 @@ A python script for transferring files easily between the Unix-based systems. (P
 Shell:
 
 ```shell
-$ ./install.sh
+(NETGET_DIRECTORY)$ ./install.sh
 ```
 
 ### Usage

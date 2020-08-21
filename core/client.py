@@ -49,10 +49,29 @@ class NetgetClient:
 			self.sock.close()
 			sys.exit(1)
 
+		# RSA
+
+		# All packets are encrypted by RSA cryptography
+		# The client sends the public key
+		# Then the server encrypts packets with the client's public key
+		# The client can decrypt packets with the private key.
+		#
+		# -=-=-=-=-=-=-=- SCHEMA -=-=-=-=-=-=-=-
+		#
+		# (SERVER)   <====REQUEST====   (CLEINT)
+		# (SERVER)   =====ACCEPT====>   (CLEINT)
+		# (SERVER)   <====PUB KEY====   (CLEINT)
+		# (SERVER)   ===ENCRYPTED===>   (CLEINT)
+		# (SERVER)   ===ENCRYPTED===>   (CLEINT)
+		# (SERVER)   ===ENCRYPTED===>   (CLEINT)
+		# (SERVER)   ===ENCRYPTED===>   (CLEINT)
+		# (SERVER)   ======END======>   (CLEINT)
+		#
+
 		try:
 
-			self.rsa = RSA_Module.RSAClass()
-			self.sock.send(self.rsa.publicKey())
+			self.rsa = RSA_Module.RSAClass() # init rsa object
+			self.sock.send(self.rsa.publicKey()) # sending the public key
 
 		except:
 
@@ -64,7 +83,7 @@ class NetgetClient:
 		p = self.sock.recv(4096)
 
 		while p:
-			p = self.rsa.decrypt(p, self.rsa.privateKey())
+			p = self.rsa.decrypt(p, self.rsa.privateKey()) # decrypt the packet with the private key
 			self.theFile.write(p)
 			p = self.sock.recv(4096)
 

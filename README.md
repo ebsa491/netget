@@ -1,4 +1,12 @@
 # netget
+
+
+ _  _ ___ _____ ___ ___ _____
+| \| | __|_   _/ __| __|_   _|
+| .` | _|  | || (_ | _|  | |  
+|_|\_|___| |_| \___|___| |_|  
+
+
 A python script for transferring files easily between the Unix-based systems. (PORT => 7575 (TCP))
 
 [![Build Status](https://img.shields.io/badge/build-passing-success)](https://samebison.ir)

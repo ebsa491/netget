@@ -20,11 +20,11 @@ function menu {
 }
 
 echo
-echo " _  _ ___ _____ ___ ___ _____ "
-echo "| \| | __|_   _/ __| __|_   _|"
-echo "| .\` | _|  | || (_ | _|  | |  "
-echo "|_|\_|___| |_| \___|___| |_|  "
-echo
+echo -e "\033[1;34m _  _ ___ _____ ___ ___ _____ "
+echo -e "| \| | __|_   _/ __| __|_   _|"
+echo -e "| .\` | _|  | || (_ | _|  | |  "
+echo -e "|_|\_|___| |_| \___|___| |_|  "
+echo -e "\033[0m"
 
 echo -n "Are you installing netget for the first time? [Y,n]> "
 

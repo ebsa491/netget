@@ -41,6 +41,15 @@ class NetgetServer:
 
 	def listen(self):
 		"""This method will waiting for client."""
+
+		try:
+			self.rsa = RSA_Module.RSAClass("server")
+		except:
+			print("[\033[0;31m-\033[0m] Error : init RSA...")
+			self.theFile.close()
+			self.sock.close()
+			sys.exit(1)
+
 		while True:
 
 			sc, address = self.sock.accept()
@@ -55,13 +64,32 @@ class NetgetServer:
 
 				# send the file
 
+				# All packets are encrypted by RSA cryptography
+				# The client sends the public key
+				# Then the server encrypts packets with the client's public key
+				# The client can decrypt packets with the private key.
+				#
+				# -=-=-=-=-=-=-=- SCHEMA -=-=-=-=-=-=-=-
+				#
+				# (SERVER)   <====REQUEST====   (CLEINT)
+				# (SERVER)   =====ACCEPT====>   (CLEINT)
+				# (SERVER)   <====PUB KEY====   (CLEINT)
+				# (SERVER)   ===ENCRYPTED===>   (CLEINT)
+				# (SERVER)   ===ENCRYPTED===>   (CLEINT)
+				# (SERVER)   ===ENCRYPTED===>   (CLEINT)
+				# (SERVER)   ===ENCRYPTED===>   (CLEINT)
+				# (SERVER)   ======END======>   (CLEINT)
+				#
+
 				print("[\033[0;32m+\033[0m] Sending the file...")
+
+				clientKey = sc.recv(2048) # gets the client public key
 
 				p = self.theFile.read(4096)
 
 				while p:
-					sc.send(p)
 
+					sc.send(self.rsa.encrypt(p, clientKey)) # encrypt data with the client public key
 					p = self.theFile.read(4096)
 
 				print("[\033[0;32m+\033[0m] Done!")
@@ -70,6 +98,7 @@ class NetgetServer:
 
 	def ctrlC(self, sig, frame):
 		"""This method can shut the server down."""
+
 		ans = input("Do you want to shutdown the server? [y,N]> ")
 
 		if str(ans).lower() == 'y':

@@ -83,14 +83,26 @@ class NetgetServer:
 
 				print("[\033[0;32m+\033[0m] Sending the file...")
 
-				clientKey = sc.recv(2048) # gets the client public key
+				try:
+					clientKey = sc.recv(2048) # gets the client public key
+				except:
+					print("[\033[0;31m-\033[0m] Error in getting the public key...")
+					self.sock.close()
+					self.theFile.close()
+					sys.exit(1)
 
-				p = self.theFile.read(4096)
-
-				while p:
-
-					sc.send(self.rsa.encrypt(p, clientKey)) # encrypt data with the client public key
+				try:
 					p = self.theFile.read(4096)
+
+					while p:
+
+						sc.send(self.rsa.encrypt(p, clientKey)) # encrypt data with the client public key
+						p = self.theFile.read(4096)
+				except:
+					print("[\033[0;31m-\033[0m] Error in uploading the data...")
+					self.sock.close()
+					self.theFile.close()
+					sys.exit(1)
 
 				print("[\033[0;32m+\033[0m] Done!")
 

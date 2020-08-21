@@ -10,13 +10,14 @@ from Crypto.Random import new as Random
 from base64 import b64encode, b64decode
 
 class RSAClass:
-	def __init__(self):
-		rng = Random().read
+	def __init__(self, type="client"):
+		if type == "client":
+			rng = Random().read
 
-		key = RSA.generate(2048, rng)
+			key = RSA.generate(2048, rng)
 
-		self.__publicKey = key.publickey().exportKey('PEM')
-		self.__privateKey = key.exportKey('PEM')
+			self.__publicKey = key.publickey().exportKey('PEM')
+			self.__privateKey = key.exportKey('PEM')
 
 	def publicKey(self):
 		return self.__publicKey

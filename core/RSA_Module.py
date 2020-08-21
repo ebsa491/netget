@@ -26,7 +26,7 @@ class RSAClass:
 		return self.__privateKey
 
 	def encrypt(self, data, publicKeyObj):
-		plainData = b64encode(data.encode())
+		plainData = b64encode(data)
 
 		publicKey = RSA.importKey(publicKeyObj)
 
@@ -34,10 +34,10 @@ class RSAClass:
 
 		encrypted = encryptionCipher.encrypt(plainData)
 
-		return b64encode(encrypted).decode()
+		return b64encode(encrypted)
 
 	def decrypt(self, data, privateKeyObj):
-		encrypted = b64decode(data.encode())
+		encrypted = b64decode(data)
 
 		privateKey = RSA.importKey(privateKeyObj)
 
@@ -45,4 +45,4 @@ class RSAClass:
 
 		plainData = decryptionCipher.decrypt(encrypted, 16)
 
-		return b64decode(plainData).decode()
+		return b64decode(plainData)

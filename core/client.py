@@ -80,15 +80,21 @@ class NetgetClient:
 			self.theFile.close()
 			sys.exit(1)
 
-		p = self.sock.recv(4096)
-
-		while p:
-			p = self.rsa.decrypt(p, self.rsa.privateKey()) # decrypt the packet with the private key
-			self.theFile.write(p)
+		try:
 			p = self.sock.recv(4096)
 
-		self.theFile.close()
-		self.sock.close()
+			while p:
+				p = self.rsa.decrypt(p, self.rsa.privateKey()) # decrypt the packet with the private key
+				self.theFile.write(p)
+				p = self.sock.recv(4096)
+
+			self.theFile.close()
+			self.sock.close()
+		except:
+			print("[\033[0;31m-\033[0m] Error in connecting to the server...")
+			self.sock.close()
+			self.theFile.close()
+			sys.exit(1)
 
 		print("[\033[0;32m+\033[0m] Download completed!")
 

@@ -19,6 +19,13 @@ function menu {
 	fi
 }
 
+echo
+echo " _  _ ___ _____ ___ ___ _____ "
+echo "| \| | __|_   _/ __| __|_   _|"
+echo "| .\` | _|  | || (_ | _|  | |  "
+echo "|_|\_|___| |_| \___|___| |_|  "
+echo
+
 echo -n "Are you installing netget for the first time? [Y,n]> "
 
 read answer

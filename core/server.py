@@ -14,6 +14,7 @@ class NetgetServer:
 	"""This is the main class of the server program."""
 
 	def __init__(self):
+		""" INIT """
 
 		if len(sys.argv) > 1 and str(sys.argv[1]) != __file__: # this condition checks the script's arguments.
 
@@ -128,7 +129,6 @@ class NetgetServer:
 		else:
 			# keep going
 			print("[\033[0;32m+\033[0m] Server is up...")
-
 
 if __name__ == '__main__':
 	netget_server = NetgetServer()

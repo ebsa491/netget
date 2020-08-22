@@ -15,6 +15,7 @@ class NetgetClient:
 	"""This is the main class of the client program."""
 
 	def __init__(self):
+		""" INIT """
 
 		if len(sys.argv) > 2 and str(sys.argv[1]) != __file__: # this condition checks the script's arguments.
 
